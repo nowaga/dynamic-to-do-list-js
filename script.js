@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
-        removeBtn.onclick = () => taskList.removeChild(li);
+        removeBtn.onclick = function() {
+            taskList.removeChild(li);
+        };
 
         li.appendChild(removeBtn);
         taskList.appendChild(li);
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission if applicable
             addTask();
         }
     });
