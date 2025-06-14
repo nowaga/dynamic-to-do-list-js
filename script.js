@@ -1,49 +1,48 @@
-// Wait until the DOM content is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Select DOM elements
+    // Select DOM Elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Function to add a task
+    // Function to add a new task
     function addTask() {
-        const taskText = taskInput.value.trim(); // Get and trim input value
+        const taskText = taskInput.value.trim();
 
-        // Validate task text
         if (taskText === '') {
             alert('Please enter a task.');
             return;
         }
 
-        // Create new list item
+        // Create new list item and remove button
         const li = document.createElement('li');
         li.textContent = taskText;
 
-        // Create remove button
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
 
-        // Set remove functionality
+        // Remove task on click
         removeBtn.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Append button to list item and item to list
+        // Append remove button to list item and list item to task list
         li.appendChild(removeBtn);
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear input field
         taskInput.value = '';
     }
 
-    // Event listener for add button
+    // Add click event listener to add button
     addButton.addEventListener('click', addTask);
 
-    // Allow adding task by pressing Enter
+    // Add keypress event listener to input field for Enter key
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
+
+    // Do NOT call addTask here on page load
 });
