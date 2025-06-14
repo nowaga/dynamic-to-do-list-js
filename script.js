@@ -16,20 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
-        removeBtn.onclick = function() {
-            taskList.removeChild(li);
-        };
 
         li.appendChild(removeBtn);
         taskList.appendChild(li);
         taskInput.value = '';
     }
 
+    taskList.addEventListener('click', (event) => {
+        if (event.target.className === 'remove-btn') {
+            taskList.removeChild(event.target.parentNode);
+        }
+    });
+
     addButton.addEventListener('click', addTask);
 
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent form submission if applicable
+            event.preventDefault(); // Prevent form submission
             addTask();
         }
     });
